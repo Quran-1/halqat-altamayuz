@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>البرنامج اليومي { حلقة التميز }</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #f5efe0, #fff8e1);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: #fffdf7;
+      padding: 30px;
+      border-radius: 18px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      border-top: 6px solid #d4af37;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d4af37;
+      margin-bottom: 25px;
+    }
+
+    ol { padding-right: 20px; margin: 0; }
+
+    li {
+      margin-bottom: 25px;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .options {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .option-button {
+      background-color: #e6e6e6;
+      color: #333;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+
+    .option-button.selected {
+      background-color: #d4af37;
+      color: white;
+      border-color: #b58b2b;
+    }
+
+    .hidden { display: none; }
+
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      background: #fdf6e3;
+      margin-top: 10px;
+    }
+
+    textarea { resize: vertical; }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button[type="submit"] {
+      background-color: #d4af37;
+      color: white;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #b58b2b;
+    }
+
+    #resetBtn {
+      display: none;
+      background-color: #1e88e5;
+      color: white;
+    }
+
+    #resetBtn:hover {
+      background-color: #1565c0;
+    }
+
+    #successMessage {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>البرنامج اليومي - حلقة التميز</h2>
+
+    <form id="myForm" action="https://formsubmit.co/hamaood895@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="">
+
+      <label>الاسم:</label>
+      <input type="text" name="الاسم" required>
+
+      <ol>
+        <li>هل انتهيت من الربط العام؟
+          <div class="options" data-question="الربط العام">
+            <div class="option-button" data-value="نعم">نعم</div>
+            <div class="option-button" data-value="لا">لا</div>
+          </div>
+        </li>
+
+        <li>هل انتهيت من المراجعة العامة؟
+          <div class="options" data-question="المراجعة العامة">
+            <div class="option-button" data-value="نعم">نعم</div>
+            <div class="option-button" data-value="لا">لا</div>
+          </div>
+        </li>
+
+        <li>هل قمت بتكرار وجه أمس 30 مرة؟
+          <div class="options" data-question="تكرار الوجه">
+            <div class="option-button" data-value="نعم">نعم</div>
+            <div class="option-button" data-value="لا">لا</div>
+          </div>
+        </li>
+
+        <li>هل قمت بتكرار الست؟ (اختياري)
+          <div class="options" data-question="تكرار الست" data-optional="true">
+            <div class="option-button" data-value="نعم">نعم</div>
+            <div class="option-button" data-value="لا">لا</div>
+          </div>
+        </li>
+      </ol>
+
+      <label>مقدار الحفظ الجديد:</label>
+      <select id="حفظ_الجديد_الاختيار" name="مقدار الحفظ الجديد" required>
+        <option value="" disabled selected>اختر</option>
+        <option value="لا يوجد حفظ">لا يوجد حفظ</option>
+        <option value="وجه واحد">وجه واحد</option>
+        <option value="غير ذلك">غير ذلك</option>
+      </select>
+
+      <div id="otherInputContainer" class="hidden">
+        <input type="text" name="تفصيل الحفظ" placeholder="اذكر مقدار الحفظ..." />
+      </div>
+
+      <button type="submit">إرسال</button>
+    </form>
+
+    <div id="successMessage">✅ تم إرسال النموذج بنجاح!</div>
+    <button id="resetBtn">🔁 إرسال رد آخر</button>
+  </div>
+
+  <script>
+    const form = document.getElementById("myForm");
+    const successMessage = document.getElementById("successMessage");
+    const resetBtn = document.getElementById("resetBtn");
+
+    // تجهيز خيارات نعم / لا
+    document.querySelectorAll(".options").forEach(group => {
+      const questionName = group.dataset.question;
+      const isOptional = group.dataset.optional === "true";
+
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = questionName;
+      group.appendChild(hiddenInput);
+
+      group.querySelectorAll(".option-button").forEach(button => {
+        button.addEventListener("click", () => {
+          group.querySelectorAll(".option-button").forEach(btn => btn.classList.remove("selected"));
+          button.classList.add("selected");
+          hiddenInput.value = button.dataset.value;
+        });
+      });
+    });
+
+    // مقدار الحفظ
+    const حفظ_الاختيار = document.getElementById("حفظ_الجديد_الاختيار");
+    const otherInputContainer = document.getElementById("otherInputContainer");
+
+    حفظ_الاختيار.addEventListener("change", () => {
+      if (حفظ_الاختيار.value === "غير ذلك") {
+        otherInputContainer.classList.remove("hidden");
+        otherInputContainer.querySelector("input").setAttribute("required", "required");
+      } else {
+        otherInputContainer.classList.add("hidden");
+        otherInputContainer.querySelector("input").removeAttribute("required");
+        otherInputContainer.querySelector("input").value = "";
+      }
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let valid = true;
+
+      document.querySelectorAll(".options").forEach(group => {
+        const isOptional = group.dataset.optional === "true";
+        const hiddenInput = group.querySelector("input[type='hidden']");
+        if (!isOptional && hiddenInput.value.trim() === "") {
+          valid = false;
+          group.scrollIntoView({ behavior: 'smooth' });
+          group.style.outline = '2px solid red';
+          setTimeout(() => { group.style.outline = 'none'; }, 1500);
+        }
+      });
+
+      if (!form.checkValidity() || !valid) {
+        form.reportValidity();
+        return;
+      }
+
+      // إرسال البيانات عبر الفورم إلى FormSubmit
+      form.submit();
+
+      // إظهار رسالة النجاح مع إخفاء الفورم (توقع أن الصفحة ستنتقل وفقًا لإعدادات _next)
+      form.style.display = "none";
+      successMessage.style.display = "block";
+      resetBtn.style.display = "block";
+    });
+
+    resetBtn.addEventListener("click", function () {
+      form.reset();
+      form.style.display = "block";
+      successMessage.style.display = "none";
+      resetBtn.style.display = "none";
+      document.querySelectorAll(".option-button").forEach(btn => btn.classList.remove("selected"));
+      otherInputContainer.classList.add("hidden");
+    });
+  </script>
+
+</body>
+</html>
